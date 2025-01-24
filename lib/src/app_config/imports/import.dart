@@ -28,3 +28,11 @@ export 'package:nfcmrt/src/presentation/blocs/dashboard_bloc/dashboard_bloc.dart
 export 'package:nfcmrt/src/presentation/blocs/dashboard_bloc/dashboard_state.dart';
 export 'package:nfcmrt/src/presentation/blocs/dashboard_bloc/dashboard_event.dart';
 export 'package:nfcmrt/src/presentation/screens/dashboard/dashboard_view.dart';
+export 'package:nfcmrt/src/core/router/app_router.dart';
+export 'package:nfcmrt/src/app_config/imports/import.dart';
+export 'package:get_it/get_it.dart';
+export 'package:nfcmrt/src/core/dependency/init_dependencies.dart';
+export 'package:nfcmrt/src/domain/repositories/card_information_repositories.dart';
+export 'package:nfcmrt/src/domain/entities/transaction_entities.dart';
+export 'package:nfcmrt/src/data/datasources/nfc_scan.dart';
+export 'package:nfcmrt/src/domain/usecases/get_card_information.dart';

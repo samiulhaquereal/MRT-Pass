@@ -1,11 +1,30 @@
 import 'package:nfcmrt/src/app_config/imports/import.dart';
 
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
-  DashboardBloc() : super(DashboardState()) {
-    on<DashboardGetBangladeshInformation>(_onGetBangladeshInformation);
+
+  final TransactionInformation transactionInformation;
+
+  DashboardBloc({required this.transactionInformation}) : super(DashboardState()) {
+    on<CardScan>(_onGetInformation);
   }
 
-  void _onGetBangladeshInformation(DashboardGetBangladeshInformation event, Emitter<DashboardState> emit)async{
+  void _onGetInformation(CardScan event, Emitter<DashboardState> emit)async{
     emit(DashboardLoading());
+    try {
+      final result = await transactionInformation(NoParams());
+      result.fold(
+            (failure) {
+          emit(DashboardError(failure.name));
+        },
+            (success) {
+              print(success);
+          // Emit loaded state with the fetched data
+          //emit(DashboardLoaded(transactions: transactions));
+        },
+      );
+    } catch (e) {
+      // Handle unexpected errors
+      emit(DashboardError("Unexpected error occurred: ${e.toString()}"));
+    }
   }
 }

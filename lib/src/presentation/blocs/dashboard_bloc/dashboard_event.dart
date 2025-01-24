@@ -7,4 +7,4 @@ class DashboardEvent extends Equatable{
 
 }
 
-class DashboardGetBangladeshInformation extends DashboardEvent{}
+class CardScan extends DashboardEvent{}
