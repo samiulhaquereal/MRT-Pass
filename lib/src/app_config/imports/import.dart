@@ -24,3 +24,7 @@ export 'package:go_router/go_router.dart';
 export 'package:nfcmrt/src/core/router/route_constants.dart';
 export 'package:nfcmrt/src/presentation/screens/splash/splash_view.dart';
 export 'package:nfcmrt/src/presentation/navigation/navigation_helper.dart';
+export 'package:nfcmrt/src/presentation/blocs/dashboard_bloc/dashboard_bloc.dart';
+export 'package:nfcmrt/src/presentation/blocs/dashboard_bloc/dashboard_state.dart';
+export 'package:nfcmrt/src/presentation/blocs/dashboard_bloc/dashboard_event.dart';
+export 'package:nfcmrt/src/presentation/screens/dashboard/dashboard_view.dart';

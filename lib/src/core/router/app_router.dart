@@ -8,10 +8,10 @@ class AppRouter {
         path: Routes.getSplashRoute(),
         builder: (context, state) => const SplashScreen(),
       ),
-      /*GoRoute(
+      GoRoute(
         path: Routes.getDashboardRoute(),
         builder: (context, state) => DashboardScreen(),
-      ),*/
+      ),
     ],
   );
 }
