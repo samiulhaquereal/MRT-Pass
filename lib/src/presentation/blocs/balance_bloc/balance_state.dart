@@ -11,7 +11,6 @@ class BalanceInitial extends BalanceState {}
 class BalanceLoading extends BalanceState {}
 
 class BalanceLoaded extends BalanceState {
-  BalanceLoaded();
 
   @override
   List<Object?> get props => [];

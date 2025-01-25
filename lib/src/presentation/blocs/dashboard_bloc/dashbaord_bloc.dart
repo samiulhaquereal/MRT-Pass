@@ -9,7 +9,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   static final List<Widget> navigationPages = [
     BalanceScreen(),
-    Center(child: Text("Fare Screen")),
+    FareScreen()
   ];
 
   void _onPageInit(DashboardPageLoaded event, Emitter<DashboardState> emit)async{

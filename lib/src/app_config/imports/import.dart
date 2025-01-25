@@ -44,3 +44,11 @@ export 'package:nfcmrt/src/presentation/blocs/dashboard_bloc/dashbaord_bloc.dart
 export 'package:nfcmrt/src/presentation/screens/dashbaord/widgets/custome_navigation_bar.dart';
 export 'package:nfcmrt/src/presentation/screens/dashbaord/dashboard_view.dart';
 export 'package:line_awesome_flutter/line_awesome_flutter.dart';
+export 'package:nfcmrt/src/presentation/blocs/fare_bloc/fare_event.dart';
+export 'package:nfcmrt/src/presentation/blocs/fare_bloc/fare_state.dart';
+export 'package:nfcmrt/src/presentation/blocs/fare_bloc/fare_bloc.dart';
+export 'package:nfcmrt/src/presentation/screens/fare/fare_view.dart';
+export 'package:nfcmrt/src/data/models/station_model.dart';
+export 'package:nfcmrt/src/domain/entities/station_entities.dart';
+export 'package:nfcmrt/src/domain/repositories/fare_calculation_repositories.dart';
+export 'package:nfcmrt/src/data/datasources/fare_calculation.dart';
