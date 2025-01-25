@@ -148,7 +148,7 @@ class FareScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              'Discount ৳ ${state.discountedFare}',
+                              'Discount ৳ ${state.discountedFare ?? 0}',
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 color: Colors.green,

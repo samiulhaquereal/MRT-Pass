@@ -28,7 +28,7 @@ class CustomNavigationBar extends StatelessWidget {
                   child: BottomNavigationBar(
                     backgroundColor: Colors.transparent,
                     elevation: 0,
-                    selectedItemColor: Colors.green, // Replace with your AppColors.primaryColor
+                    selectedItemColor: Color(0xFF0F5D20), // Replace with your AppColors.primaryColor
                     unselectedItemColor: Colors.grey, // Replace with custom color logic
                     currentIndex: state.currentIndex,
                     onTap: (index) {
@@ -54,7 +54,7 @@ class CustomNavigationBar extends StatelessWidget {
               child: Container(
                 width: MediaQuery.of(context).size.width / 2,
                 height: 3.h,
-                color: Colors.green, // Replace with your AppColors.primaryColor
+                color: Color(0xFF0F5D20), // Replace with your AppColors.primaryColor
               ),
             ),
           ],

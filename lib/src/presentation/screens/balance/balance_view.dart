@@ -1,5 +1,8 @@
 import 'package:nfcmrt/src/app_config/imports/import.dart';
+import 'package:nfcmrt/src/app_config/keys/global_key.dart';
 import 'package:nfcmrt/src/core/constants/app_constants.dart';
+import 'package:nfcmrt/src/presentation/screens/balance/widget/card_back.dart';
+import 'package:nfcmrt/src/presentation/screens/balance/widget/card_front.dart';
 
 class BalanceScreen extends StatelessWidget {
   const BalanceScreen({super.key});
@@ -8,10 +11,6 @@ class BalanceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('MRT Pass',style: TextStyle(color: Colors.black),),
-          centerTitle: true,
-        ),
         body: BlocConsumer<BalanceBloc, BalanceState>(
           listener: _blocListener,
           builder: _blocBuilder,
@@ -53,7 +52,7 @@ class BalanceScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 15.h),
         child: Column(
           children: [
-            _buildBalanceCard(context),
+            _buildBalanceCard(),
             Gap(18.h),
             _buildScanButton(context),
             Gap(18.h),
@@ -160,44 +159,20 @@ class BalanceScreen extends StatelessWidget {
           );
   }
 
-  Widget _buildBalanceCard(BuildContext context) {
-    return Container(
-            padding: EdgeInsets.symmetric(vertical: 50.h),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20.r),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 4,
-                  spreadRadius: 1,
-                  offset: Offset(0, 2),
-                )
-              ],
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Latest Balance',
-                  style: TextStyle(
-                    fontSize: 20.sp,
-                    color: Colors.grey[600],
-                    fontWeight: FontWeight.w500
-                  ),
-                ),
-                Gap(2.h),
-                Text(
-                  '৳ 100',
-                  style: TextStyle(
-                    fontSize: 30.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-          );
+  Widget _buildBalanceCard() {
+    return  FlipCard(
+      key: flipCardKey,
+      onTapFlipping:true,
+      controller: flipCardController,
+      frontWidget: CreditCardFont(
+        cardNumber: '',
+        cardHolderName: '',
+        expiryDate: '',
+      ),
+      backWidget: CreditCardBack(
+        cvcNumber:'',
+      ),
+      rotateSide: RotateSide.right,
+    );
   }
 }

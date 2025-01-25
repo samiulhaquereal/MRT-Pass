@@ -9,6 +9,8 @@ class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
     on<CardScan>(_onGetInformation);
   }
 
+
+
   void _onPageInit(PageLoaded event, Emitter<BalanceState> emit)async{
     emit(BalanceLoaded());
   }

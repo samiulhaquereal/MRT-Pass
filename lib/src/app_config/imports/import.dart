@@ -53,3 +53,5 @@ export 'package:nfcmrt/src/domain/entities/station_entities.dart';
 export 'package:nfcmrt/src/domain/repositories/fare_calculation_repositories.dart';
 export 'package:nfcmrt/src/data/datasources/fare_calculation.dart';
 export 'package:nfcmrt/src/domain/usecases/fare_calculator.dart';
+export 'package:flutter_flip_card/flutter_flip_card.dart';
+export 'package:flutter_svg/flutter_svg.dart';

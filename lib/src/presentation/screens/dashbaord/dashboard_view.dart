@@ -8,6 +8,11 @@ class DashboardScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => DashboardBloc()..add(DashboardPageLoaded()),
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('MRT Pass',style: TextStyle(color: Colors.white)),
+          centerTitle: true,
+          backgroundColor: Color(0xFF0F5D20),
+        ),
         body: BlocBuilder<DashboardBloc, DashboardState>(
           builder: (context, state) {
             if (state is! DashboardLoaded) {
