@@ -1,13 +1,12 @@
 import 'package:nfcmrt/src/app_config/imports/import.dart';
 
 class TransactionParser {
-  // Method to check if the transaction is valid
+
   static bool isValidTransaction(Transaction transaction) {
     final cutoffDate = DateTime(2020, 1, 1, 0, 0);
     return transaction.timestamp.isAfter(cutoffDate);
   }
 
-  // Parse the transaction response from the NFC tag
   static List<Transaction> parseTransactionResponse(Uint8List response) {
     final transactions = <Transaction>[];
 
@@ -62,24 +61,22 @@ class TransactionParser {
     final trailingBytes = block.sublist(14, 16);
     final trailing = ByteParser.toHexString(trailingBytes);
 
-    // Convert timestamp value to DateTime (you can implement this based on your format)
     final timestamp = TimestampService.decodeTimestamp(timestampValue);
+    final dateTime = TimestampService.formatDateTime(timestamp);
 
-    // Assuming station names are stored somewhere in your app
     String fromStation = StationService.getStationName(fromStationCode);
     String toStation = StationService.getStationName(toStationCode);
     final fromStationName = StationService.translate(fromStation);  // This should be retrieved from a station list
     final toStationName = StationService.translate(toStation);  // This should be retrieved from a station list
-    print(fromStationName);
-    print(toStationName);
     return Transaction(
       fixedHeader: fixedHeaderStr,
-      timestamp: timestamp,
+      dateTime: dateTime,
       transactionType: transactionType,
       fromStation: fromStationName,
       toStation: toStationName,
       balance: balance,
       trailing: trailing,
+      timestamp: DateTime.now(),
     );
   }
 }

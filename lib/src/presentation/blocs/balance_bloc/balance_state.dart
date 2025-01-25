@@ -11,9 +11,12 @@ class BalanceInitial extends BalanceState {}
 class BalanceLoading extends BalanceState {}
 
 class BalanceLoaded extends BalanceState {
+  BalanceLoaded({this.transactions = const []});
+
+  final List<TransactionEntity> transactions;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [transactions];
 }
 
 class BalanceError extends BalanceState {

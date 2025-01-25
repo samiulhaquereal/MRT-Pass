@@ -2,17 +2,18 @@ import 'package:nfcmrt/src/app_config/imports/import.dart';
 
 class CreditCardBack extends StatelessWidget {
 
-  final String? cvcNumber;
+  final String? balance;
 
-  CreditCardBack({
-    this.cvcNumber,
+  const CreditCardBack({
+    super.key,
+    this.balance,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.sizeOf(context).width,
-      height: 240,
+      width: MediaQuery.sizeOf(context).width.w,
+      height: 180.h,
       decoration: BoxDecoration(
         gradient: LinearGradient(
             colors: [
@@ -49,7 +50,7 @@ class CreditCardBack extends StatelessWidget {
           Positioned(
             top: 135,
             right: 70,
-            child: Text(cvcNumber?.isEmpty ?? true ? 'Latest Balance: 0' : cvcNumber!),
+            child: Text(balance?.isEmpty ?? true ? 'Latest Balance: 0' : 'Latest Balance: ৳ ${balance!}'),
           ),
           Positioned(
             top: 185,

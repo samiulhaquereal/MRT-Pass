@@ -1,46 +1,52 @@
+import 'dart:developer';
 import 'package:nfcmrt/src/app_config/imports/import.dart';
 
 abstract interface class CardScanService {
-  Future<List<Transaction>> scanCard();
+  Future<Map<String, dynamic>> scanCard();
 }
 
 class CardScanServiceImpl extends CardScanService {
-
   @override
-  Future<List<Transaction>> scanCard() async {
+  Future<Map<String, dynamic>> scanCard() async {
+    final completer = Completer<Map<String, dynamic>>();
+
     try {
       List<Transaction> transactions = [];
-      // Start the NFC session
+
       await NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
-        // Access the NFC-F specific data
-        final nfcF = NfcF.from(tag);
-        if (nfcF == null) {
-          print("This tag is not an NFC-F tag.");
+        try {
+          final nfcF = NfcF.from(tag);
+          if (nfcF == null) {
+            log("This tag is not an NFC-F tag.");
+            NfcManager.instance.stopSession();
+            throw Exception("Invalid NFC-F tag.");
+          }
+          // Extract the IDm (identifier)
+          List<int> idm = List<int>.from(tag.data['nfcf']['identifier']);
+          String cardId = ByteParser.toHexString(Uint8List.fromList(idm));
+          print(cardId);
+
+          NfcCommandGenerator nfcCommandGenerator = NfcCommandGenerator();
+          List<int> readCommand = nfcCommandGenerator.generateReadCommand(idm);
+
+          final response = await nfcF.transceive(data: Uint8List.fromList(readCommand));
+
+          transactions = TransactionParser.parseTransactionResponse(response);
+          //completer.complete(transactions);
+          completer.complete({
+            'cardId': cardId,
+            'transactions': transactions,
+          });
           NfcManager.instance.stopSession();
-          throw Exception("Invalid NFC-F tag.");
+        } catch (e) {
+          log('Error during tag read: $e');
+          completer.completeError(e);
+          NfcManager.instance.stopSession();
         }
-        // Extract the IDm (identifier)
-        List<int> idm = List<int>.from(tag.data['nfcf']['identifier']);
-
-        // Generate the read command
-        NfcCommandGenerator nfcCommandGenerator = NfcCommandGenerator();
-        List<int> readCommand = nfcCommandGenerator.generateReadCommand(idm);
-
-        // Use transceive to send the command and receive the response
-        final response = await nfcF.transceive(data: Uint8List.fromList(readCommand));
-        print('Response from NFC tag: ${ByteParser.toHexString(response)}');
-
-        // Parse the transaction response
-        transactions = TransactionParser.parseTransactionResponse(response);
-        for (var transaction in transactions) {
-          print(transaction);
-        }
-        // Stop the session after reading the tag
-        NfcManager.instance.stopSession();
       });
-      return transactions;
+      return completer.future;
     } catch (e) {
-      print('Error during tag read: $e');
+      log('Error during NFC session: $e');
       NfcManager.instance.stopSession();
       throw UnknownError(e.toString());
     }

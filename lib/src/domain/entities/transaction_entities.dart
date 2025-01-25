@@ -1,8 +1,9 @@
 import 'package:nfcmrt/src/app_config/imports/import.dart';
 
 class TransactionEntity {
+  final String cardId;
   final String fixedHeader;
-  final DateTime timestamp;
+  final String? timestamp;
   final String transactionType;
   final String fromStation;
   final String toStation;
@@ -11,7 +12,8 @@ class TransactionEntity {
 
   TransactionEntity({
     required this.fixedHeader,
-    required this.timestamp,
+    required this.cardId,
+    this.timestamp,
     required this.transactionType,
     required this.fromStation,
     required this.toStation,
@@ -20,10 +22,11 @@ class TransactionEntity {
   });
 
   /// Factory constructor to create TransactionEntity from a Transaction object
-  factory TransactionEntity.fromTransaction(Transaction transaction) {
+  factory TransactionEntity.fromTransaction(Transaction transaction, String cardId) {
     return TransactionEntity(
+      cardId: cardId,
       fixedHeader: transaction.fixedHeader,
-      timestamp: transaction.timestamp,
+      timestamp: transaction.dateTime ,
       transactionType: transaction.transactionType,
       fromStation: transaction.fromStation,
       toStation: transaction.toStation,
@@ -34,6 +37,6 @@ class TransactionEntity {
 
   @override
   String toString() {
-    return 'TransactionEntity{fixedHeader: $fixedHeader, timestamp: $timestamp, transactionType: $transactionType, fromStation: $fromStation, toStation: $toStation, balance: $balance, trailing: $trailing}';
+    return 'TransactionEntity{cardId: $cardId,fixedHeader: $fixedHeader, timestamp: $timestamp, transactionType: $transactionType, fromStation: $fromStation, toStation: $toStation, balance: $balance, trailing: $trailing}';
   }
 }

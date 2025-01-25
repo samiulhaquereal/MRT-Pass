@@ -55,3 +55,4 @@ export 'package:nfcmrt/src/data/datasources/fare_calculation.dart';
 export 'package:nfcmrt/src/domain/usecases/fare_calculator.dart';
 export 'package:flutter_flip_card/flutter_flip_card.dart';
 export 'package:flutter_svg/flutter_svg.dart';
+export 'dart:async';

@@ -10,7 +10,6 @@ class FareInformation implements UseCase<Map<String, dynamic>, NoParams> {
   Future<Either<Failure, Map<String, dynamic>>> call(NoParams params) async {
     try {
       final response = await fareCalculationRepositories.fareInformation();
-
       return response.fold(
             (failure) => Left(failure),
             (success) {

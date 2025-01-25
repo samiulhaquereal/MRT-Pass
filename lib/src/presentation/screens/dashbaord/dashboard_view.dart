@@ -9,7 +9,7 @@ class DashboardScreen extends StatelessWidget {
       create: (_) => DashboardBloc()..add(DashboardPageLoaded()),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('MRT Pass',style: TextStyle(color: Colors.white)),
+          title: Text('MRT PASS',style: TextStyle(color: Colors.white)),
           centerTitle: true,
           backgroundColor: Color(0xFF0F5D20),
         ),

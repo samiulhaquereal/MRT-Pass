@@ -52,11 +52,11 @@ class BalanceScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 15.h),
         child: Column(
           children: [
-            _buildBalanceCard(),
+            _buildBalanceCard(state.transactions),
             Gap(18.h),
             _buildScanButton(context),
             Gap(18.h),
-            _buildRecentTransaction(),
+            _buildRecentTransaction(state.transactions),
           ],
         ),
       );
@@ -64,7 +64,7 @@ class BalanceScreen extends StatelessWidget {
     return const SizedBox();
   }
 
-  Widget _buildRecentTransaction() {
+  Widget _buildRecentTransaction(List<TransactionEntity> transactions) {
     return Expanded(
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 10.h,horizontal: 10.w),
@@ -96,9 +96,9 @@ class BalanceScreen extends StatelessWidget {
                     child: ListView.builder(
                       shrinkWrap: true,
                       physics: ClampingScrollPhysics(),
-                      itemCount: AppConstants.transactions.length,
+                      itemCount: transactions.length,
                       itemBuilder: (context, index) {
-                        final transaction = AppConstants.transactions[index];
+                        final transaction = transactions[index];
                         return Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: 10.w,
@@ -113,7 +113,7 @@ class BalanceScreen extends StatelessWidget {
                                   CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      transaction['route'],
+                                      '${transaction.fromStation} → ${transaction.toStation}',
                                       style: TextStyle(
                                         fontSize: 14.sp,
                                         fontWeight: FontWeight.w400,
@@ -121,7 +121,7 @@ class BalanceScreen extends StatelessWidget {
                                     ),
                                     Gap(5.h),
                                     Text(
-                                      transaction['date'],
+                                      '${transaction.timestamp}',
                                       style: TextStyle(
                                         fontSize: 12.sp,
                                         color: Colors.grey[700],
@@ -131,11 +131,11 @@ class BalanceScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                '৳ ${transaction['amount']}',
+                              '৳ ${transaction.balance}',
                                 style: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.bold,
-                                  color: transaction['amount'] < 0
+                                  color: transaction.balance < 0
                                       ? Colors.blue
                                       : Colors.green,
                                 ),
@@ -154,23 +154,23 @@ class BalanceScreen extends StatelessWidget {
 
   Widget _buildScanButton(BuildContext context) {
     return ElevatedButton(
-            child: Text('Tag Read'),
+            child: Text('Scan'),
             onPressed: ()=> context.read<BalanceBloc>().add(CardScan()),
           );
   }
 
-  Widget _buildBalanceCard() {
+  Widget _buildBalanceCard(List<TransactionEntity> transactions) {
     return  FlipCard(
       key: flipCardKey,
       onTapFlipping:true,
       controller: flipCardController,
       frontWidget: CreditCardFont(
-        cardNumber: '',
+        cardNumber: transactions.isNotEmpty ? transactions[0].cardId : '',
         cardHolderName: '',
         expiryDate: '',
       ),
       backWidget: CreditCardBack(
-        cvcNumber:'',
+        balance: transactions.isNotEmpty ? transactions[0].balance.toString() : '',
       ),
       rotateSide: RotateSide.right,
     );

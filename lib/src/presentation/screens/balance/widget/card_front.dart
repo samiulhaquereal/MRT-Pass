@@ -51,21 +51,21 @@ class CreditCardFont extends StatelessWidget {
             top: 90,
             left: 50,
             right: 50,
-            child: cardNumber?.isEmpty ?? true ? Text('XXXX  XXXX  XXXX  XXXX',
+            child: cardNumber?.isEmpty ?? true ? Text('XX XX XX XX XX XX XX',
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ) : Text( cardNumber!,
               style: TextStyle(
-                fontSize: 26,
+                fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
           ),
-          SizedBox(height: 35,),
+          SizedBox(height: 35.h),
           Positioned(
             bottom: 30,
             left: 20,
@@ -82,7 +82,7 @@ class CreditCardFont extends StatelessWidget {
             bottom: 30,
             right: 20,
             child: Text(
-              expiryDate?.isEmpty ?? true ? '**/**' : expiryDate!,
+              expiryDate?.isEmpty ?? true ? '' : expiryDate!,
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.white,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+import 'package:intl/intl.dart';
 import 'package:nfcmrt/src/app_config/imports/import.dart';
 
 class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
@@ -8,8 +10,6 @@ class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
     on<PageLoaded>(_onPageInit);
     on<CardScan>(_onGetInformation);
   }
-
-
 
   void _onPageInit(PageLoaded event, Emitter<BalanceState> emit)async{
     emit(BalanceLoaded());
@@ -24,9 +24,15 @@ class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
           emit(BalanceError(failure.name));
         },
             (success) {
-              print(success);
-          // Emit loaded state with the fetched data
-          //emit(BalanceLoaded(transactions: transactions));
+              log("Success contains a list of transactions:");
+              final filteredTransactions = success.where((transaction) {
+                return !(transaction.fromStation == 'Unknown Station (0)' &&
+                    transaction.toStation == 'Unknown Station (0)');
+              }).toList();
+              filteredTransactions.forEach((transaction) {
+                log(transaction.toString());
+              });
+              emit(BalanceLoaded(transactions: filteredTransactions));
         },
       );
     } catch (e) {

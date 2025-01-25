@@ -7,9 +7,9 @@ class CardRepositoriesImpl implements CardRepositories{
   final CardScanService cardScanService;
 
   @override
-  Future<Either<Failure, List<Transaction>>> cardInformation()async{
+  Future<Either<Failure, Map<String, dynamic>>> cardInformation()async{
     try{
-      List<Transaction> response = await cardScanService.scanCard();
+      Map<String, dynamic> response = await cardScanService.scanCard();
       return right(response);
     }catch(e){
       return left(UnknownError(e));

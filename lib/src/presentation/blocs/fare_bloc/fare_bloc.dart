@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:nfcmrt/src/app_config/imports/import.dart';
 
 class FareBloc extends Bloc<FareEvent, FareState> {
@@ -17,14 +18,11 @@ class FareBloc extends Bloc<FareEvent, FareState> {
         emit(FarePageError(failure.name));
       },
           (success) {
-        // Extract stations and fareMatrix from the response
         final stations = (success['stations'] as List<StationModel>)
             .map((station) => StationEntities.fromStationModel(station))
             .toList();
         final fareMatrix = success['fareMatrix'] as Map<String, int>;
 
-
-        print('Real');
         emit(FareLoaded(
           stations: stations,
           selectedFrom: stations.first,
@@ -32,7 +30,7 @@ class FareBloc extends Bloc<FareEvent, FareState> {
           fare: 0,
           fareMatrix: fareMatrix, // Pass the fareMatrix to the state
         ));
-        print("Initial State: From ${stations.first.name}, To ${stations[1].name}");
+        log("Initial State: From ${stations.first.name}, To ${stations[1].name}");
       },
     );
   }
