@@ -1,8 +1,5 @@
 import 'package:nfcmrt/src/app_config/imports/import.dart';
-import 'package:nfcmrt/src/app_config/keys/global_key.dart';
-import 'package:nfcmrt/src/core/constants/app_constants.dart';
-import 'package:nfcmrt/src/presentation/screens/balance/widget/card_back.dart';
-import 'package:nfcmrt/src/presentation/screens/balance/widget/card_front.dart';
+import 'package:nfcmrt/src/presentation/screens/balance/widget/card_waiting.dart';
 
 class BalanceScreen extends StatelessWidget {
   const BalanceScreen({super.key});
@@ -20,6 +17,9 @@ class BalanceScreen extends StatelessWidget {
   }
 
   Widget _blocListener(BuildContext context, BalanceState state) {
+    if (state is WaitingForScan) {
+      context.read<BalanceBloc>().add(CardScan());
+    }
     return const SizedBox();
   }
 
@@ -47,14 +47,25 @@ class BalanceScreen extends StatelessWidget {
           ],
         ),
       );
-    } else if (state is BalanceLoaded) {
+    } else if (state is WaitingForScan) {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 15.h),
         child: Column(
           children: [
-            _buildBalanceCard(state.transactions),
-            Gap(18.h),
-            _buildScanButton(context),
+            WaitingCardView(
+              title: 'Tap Your Card',
+              subtitle: 'Hold your card behind your phone to read the balance',
+              icon: Icon(LineAwesomeIcons.credit_card,color: Colors.white,size: 25.sp),
+            ),
+          ],
+        ),
+      );
+    }else if (state is BalanceLoaded) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 15.h),
+        child: Column(
+          children: [
+            _buildBalanceCard(context,state.transactions),
             Gap(18.h),
             _buildRecentTransaction(state.transactions),
           ],
@@ -84,7 +95,7 @@ class BalanceScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Recent Transactions',
+                    'Recent Journeys',
                     style: TextStyle(
                       fontSize: 17.sp,
                       fontWeight: FontWeight.w500,
@@ -113,7 +124,7 @@ class BalanceScreen extends StatelessWidget {
                                   CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '${transaction.fromStation} → ${transaction.toStation}',
+                                      '${transaction.fromStation} → ${transaction.toStation == 'Unknown Station (0)' ? 'N/A' : transaction.toStation}',
                                       style: TextStyle(
                                         fontSize: 14.sp,
                                         fontWeight: FontWeight.w400,
@@ -131,13 +142,13 @@ class BalanceScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                              '৳ ${transaction.balance}',
+                                transaction.toStation == 'Unknown Station (0)' || transaction.fromStation == 'Unknown Station (0)' ? '৳ ${transaction.balance}' : '৳ -${transactions[index +1].balance - transaction.balance}',
                                 style: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.bold,
-                                  color: transaction.balance < 0
-                                      ? Colors.blue
-                                      : Colors.green,
+                                  color: transaction.toStation == 'Unknown Station (0)' || transaction.fromStation == 'Unknown Station (0)'
+                                      ? Colors.green
+                                      : Colors.red,
                                 ),
                               ),
                             ],
@@ -152,14 +163,7 @@ class BalanceScreen extends StatelessWidget {
           );
   }
 
-  Widget _buildScanButton(BuildContext context) {
-    return ElevatedButton(
-            child: Text('Scan'),
-            onPressed: ()=> context.read<BalanceBloc>().add(CardScan()),
-          );
-  }
-
-  Widget _buildBalanceCard(List<TransactionEntity> transactions) {
+  Widget _buildBalanceCard(BuildContext context, List<TransactionEntity> transactions) {
     return  FlipCard(
       key: flipCardKey,
       onTapFlipping:true,
@@ -167,7 +171,7 @@ class BalanceScreen extends StatelessWidget {
       frontWidget: CreditCardFont(
         cardNumber: transactions.isNotEmpty ? transactions[0].cardId : '',
         cardHolderName: '',
-        expiryDate: '',
+        onPressed: ()=> context.read<BalanceBloc>().add(PageLoaded()),
       ),
       backWidget: CreditCardBack(
         balance: transactions.isNotEmpty ? transactions[0].balance.toString() : '',

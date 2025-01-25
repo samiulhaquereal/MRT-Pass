@@ -8,6 +8,8 @@ class BalanceState extends Equatable{
 
 class BalanceInitial extends BalanceState {}
 
+class WaitingForScan extends BalanceState {}
+
 class BalanceLoading extends BalanceState {}
 
 class BalanceLoaded extends BalanceState {

@@ -1,16 +1,16 @@
 import 'package:nfcmrt/src/app_config/imports/import.dart';
 
+class WaitingCardView extends StatelessWidget {
 
-class CreditCardFont extends StatelessWidget {
+  final String? title;
+  final String? subtitle;
+  final Widget? icon;
 
-  final String? cardNumber;
-  final String? cardHolderName;
-  final VoidCallback? onPressed;
-
-  const CreditCardFont({super.key,
-    this.cardNumber,
-    this.cardHolderName,
-    this.onPressed,
+  const WaitingCardView({
+    super.key,
+    this.title,
+    this.subtitle,
+    this.icon,
   });
 
   @override
@@ -37,7 +37,7 @@ class CreditCardFont extends StatelessWidget {
               width: 340.w,
               decoration: BoxDecoration(
                   color: Colors.white.withOpacity(.2),
-                  borderRadius: BorderRadius.all(Radius.circular(300))
+                  borderRadius: BorderRadius.all(Radius.circular(200.r))
               ),
             ),
           ),
@@ -47,16 +47,14 @@ class CreditCardFont extends StatelessWidget {
             child: AssetImageView(fileName: AssetsPath.mrt_logo,height: 50.h,width: 50.w,),
           ),
           Positioned(
-            top: 90,
-            left: 50,
-            right: 50,
-            child: cardNumber?.isEmpty ?? true ? Text('XX XX XX XX XX XX XX',
-              style: TextStyle(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ) : Text( cardNumber!,
+            right: 150.w,
+            top: 40.h,
+            child: icon ?? SizedBox.shrink(),
+          ),
+          Positioned(
+            top: 70.h,
+            right: 100.w,
+            child: Text(title ?? '',
               style: TextStyle(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
@@ -66,26 +64,16 @@ class CreditCardFont extends StatelessWidget {
           ),
           SizedBox(height: 35.h),
           Positioned(
-            bottom: 30,
-            left: 20,
-            child: Text(
-              cardHolderName?.isEmpty ?? true ? 'Tap For Balance' : cardHolderName!,
-              style: TextStyle(
-                fontSize: 15.sp,
-                color: Colors.white,
-                fontWeight: FontWeight.w500
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 10.h,
+            bottom: 30.h,
+            left: 20.w,
             right: 20.w,
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF8CA6DB), // Set your custom background color here
-                ),
-                onPressed: onPressed,
-                child: Text('Rescan',style: TextStyle(fontSize: 10.sp,color: Colors.white))
+            child: Text(
+              subtitle ?? '',
+              style: TextStyle(
+                  fontSize: 15.sp,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ],

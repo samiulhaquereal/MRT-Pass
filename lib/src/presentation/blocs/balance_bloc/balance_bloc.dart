@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:intl/intl.dart';
 import 'package:nfcmrt/src/app_config/imports/import.dart';
 
 class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
@@ -12,11 +11,11 @@ class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
   }
 
   void _onPageInit(PageLoaded event, Emitter<BalanceState> emit)async{
-    emit(BalanceLoaded());
+    emit(BalanceLoading());
+    emit(WaitingForScan());
   }
 
   void _onGetInformation(CardScan event, Emitter<BalanceState> emit)async{
-    emit(BalanceLoading());
     try {
       final result = await transactionInformation(NoParams());
       result.fold(
@@ -36,7 +35,6 @@ class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
         },
       );
     } catch (e) {
-      // Handle unexpected errors
       emit(BalanceError("Unexpected error occurred: ${e.toString()}"));
     }
   }
