@@ -53,51 +53,13 @@ class DashboardScreen extends StatelessWidget {
             children: [
               ElevatedButton(
                 child: Text('Tag Read'),
-                onPressed: _tagRead,
+                onPressed: ()=> context.read<DashboardBloc>().add(CardScan()),
               ),
             ],
           ),
         ),
       );
     }
-
     return const SizedBox();
   }
-}
-
-void _tagRead() {
-  NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
-    try {
-      // Access the NFC-F specific data
-      final nfcF = NfcF.from(tag);
-      if (nfcF == null) {
-        print("This tag is not an NFC-F tag.");
-        NfcManager.instance.stopSession();
-        return;
-      }
-
-      // Extract the IDm (identifier)
-      List<int> idm = List<int>.from(tag.data['nfcf']['identifier']);
-
-      // Generate the read command
-      NfcCommandGenerator nfcCommandGenerator = NfcCommandGenerator();
-      List<int> readCommand = nfcCommandGenerator.generateReadCommand(idm);
-
-      // Use transceive to send the command and receive the response
-      final response = await nfcF.transceive(data: Uint8List.fromList(readCommand));
-      print('Response from NFC tag: ${ByteParser.toHexString(response)}');
-
-      // Parse the transaction response
-      List<Transaction> transactions = TransactionParser.parseTransactionResponse(response);
-
-      // Display or process the transactions
-      for (var transaction in transactions) {
-        print(transaction);
-      }
-    } catch (e) {
-      print('Error during tag read: $e');
-    } finally {
-      NfcManager.instance.stopSession();
-    }
-  });
 }

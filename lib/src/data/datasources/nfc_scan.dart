@@ -5,7 +5,6 @@ abstract interface class CardScanService {
 }
 
 class CardScanServiceImpl extends CardScanService {
-  CardScanServiceImpl();
 
   @override
   Future<List<Transaction>> scanCard() async {
