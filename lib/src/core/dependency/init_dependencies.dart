@@ -18,7 +18,7 @@ void initDependencies() {
   serviceLocator.registerLazySingleton<CardScanService>(() => CardScanServiceImpl());
 
   // Blocs
-  serviceLocator.registerFactory(() => DashboardBloc(
+  serviceLocator.registerFactory(() => BalanceBloc(
     transactionInformation: serviceLocator(),
   ));
   serviceLocator.registerFactory(() => SplashBloc(
