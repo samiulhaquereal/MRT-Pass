@@ -10,7 +10,7 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.getDashboardRoute(),
-        builder: (context, state) => BalanceScreen(),
+        builder: (context, state) => DashboardScreen(),
       ),
     ],
   );

@@ -1,6 +1,17 @@
-part of 'dashbaord_bloc.dart';
+import 'package:nfcmrt/src/app_config/imports/import.dart';
 
-@immutable
-sealed class DashbaordState {}
+class DashboardState extends Equatable{
+  @override
 
-final class DashbaordInitial extends DashbaordState {}
+  List<Object?> get props => [];
+}
+
+class DashboardInitial extends DashboardState {}
+class DashboardLoaded extends DashboardState {
+  final int currentIndex;
+
+  DashboardLoaded({required this.currentIndex});
+
+  @override
+  List<Object?> get props => [currentIndex];
+}
