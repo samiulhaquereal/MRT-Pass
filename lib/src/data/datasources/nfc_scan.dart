@@ -32,7 +32,9 @@ class CardScanServiceImpl extends CardScanService {
 
         // Parse the transaction response
         transactions = TransactionParser.parseTransactionResponse(response);
-
+        for (var transaction in transactions) {
+          print(transaction);
+        }
         // Stop the session after reading the tag
         NfcManager.instance.stopSession();
       });

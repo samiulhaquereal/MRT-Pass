@@ -52,3 +52,4 @@ export 'package:nfcmrt/src/data/models/station_model.dart';
 export 'package:nfcmrt/src/domain/entities/station_entities.dart';
 export 'package:nfcmrt/src/domain/repositories/fare_calculation_repositories.dart';
 export 'package:nfcmrt/src/data/datasources/fare_calculation.dart';
+export 'package:nfcmrt/src/domain/usecases/fare_calculator.dart';

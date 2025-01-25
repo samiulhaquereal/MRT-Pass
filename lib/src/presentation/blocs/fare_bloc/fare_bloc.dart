@@ -1,5 +1,4 @@
 import 'package:nfcmrt/src/app_config/imports/import.dart';
-import 'package:nfcmrt/src/domain/usecases/fare_calculator.dart';
 
 class FareBloc extends Bloc<FareEvent, FareState> {
   FareBloc({required this.fareInformation}) : super(FareInitial()) {
@@ -42,38 +41,25 @@ class FareBloc extends Bloc<FareEvent, FareState> {
     if (state is FareLoaded) {
       final currentState = state as FareLoaded;
 
-      // Only update the selected station that was changed
-      print(event.selectedFrom?.name);
-      print(event.selectedTo?.name);
       final newSelectedFrom = event.selectedFrom ?? currentState.selectedFrom;
       final newSelectedTo = event.selectedTo ?? currentState.selectedTo;
 
-      // Calculate the fare with the selected stations
       final fare = calculateFare(
         newSelectedFrom,
         newSelectedTo,
         currentState.fareMatrix,
       );
 
-      print("currentState From: ${currentState.selectedFrom.name}");
-      print("Selected From: ${newSelectedFrom.name}");
-      print("currentState To: ${currentState.selectedTo.name}");
-      print("Selected To: ${newSelectedTo.name}");
-      print("Calculated Fare: $fare");
+      final discountedFare = (fare * 0.9).toInt();
 
-      // Emit the updated state with the correct selected stations and the calculated fare
       emit(currentState.copyWith(
         selectedFrom: newSelectedFrom,
         selectedTo: newSelectedTo,
         fare: fare,
+        discountedFare: discountedFare,
       ));
     }
   }
-
-
-
-
-
 
   int calculateFare(
       StationEntities from,
@@ -85,9 +71,6 @@ class FareBloc extends Bloc<FareEvent, FareState> {
     final String key = "${from.id}-${to.id}";
     final String reverseKey = "${to.id}-${from.id}";
 
-    // Return fare or default to 0 if not found
     return fareMatrix[key] ?? fareMatrix[reverseKey] ?? 0;
   }
-
-
 }

@@ -19,6 +19,7 @@ class FareLoaded extends FareState {
   final StationEntities selectedFrom;
   final StationEntities selectedTo;
   final int fare;
+  final int? discountedFare;
   final Map<String, int> fareMatrix;
 
   const FareLoaded({
@@ -27,6 +28,7 @@ class FareLoaded extends FareState {
     required this.selectedTo,
     required this.fare,
     required this.fareMatrix,
+    this.discountedFare,
   });
 
   // A copyWith method to update specific fields without overwriting the entire state
@@ -35,6 +37,7 @@ class FareLoaded extends FareState {
     StationEntities? selectedFrom,
     StationEntities? selectedTo,
     int? fare,
+    int? discountedFare,
     Map<String, int>? fareMatrix,
   }) {
     return FareLoaded(
@@ -43,11 +46,12 @@ class FareLoaded extends FareState {
       selectedTo: selectedTo ?? this.selectedTo,
       fare: fare ?? this.fare,
       fareMatrix: fareMatrix ?? this.fareMatrix,
+      discountedFare: discountedFare ?? this.discountedFare,
     );
   }
 
   @override
-  List<Object?> get props => [stations,selectedFrom,selectedTo,fare,fareMatrix];
+  List<Object?> get props => [stations,selectedFrom,selectedTo,fare,fareMatrix,discountedFare];
 }
 
 
