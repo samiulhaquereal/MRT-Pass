@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:nfcmrt/src/app_config/imports/import.dart';
 
 class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
@@ -23,14 +22,10 @@ class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
           emit(BalanceError(failure.name));
         },
             (success) {
-              log("Success contains a list of transactions:");
               final filteredTransactions = success.where((transaction) {
                 return !(transaction.fromStation == 'Unknown Station (0)' &&
                     transaction.toStation == 'Unknown Station (0)');
               }).toList();
-              filteredTransactions.forEach((transaction) {
-                log(transaction.toString());
-              });
               emit(BalanceLoaded(transactions: filteredTransactions));
         },
       );

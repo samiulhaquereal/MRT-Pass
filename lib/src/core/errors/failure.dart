@@ -1,6 +1,5 @@
 import 'package:nfcmrt/src/app_config/imports/import.dart';
 
-/// Base Failure class
 abstract class Failure extends Equatable {
   const Failure({
     this.name = 'An unexpected error occurred',
@@ -8,8 +7,8 @@ abstract class Failure extends Equatable {
     this.error,
   });
 
-  final String name; // Error name or default message
-  final String? code; // Error code
+  final String name;
+  final String? code;
   final dynamic error;
 
   @override

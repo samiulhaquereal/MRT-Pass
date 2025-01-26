@@ -61,3 +61,5 @@ export 'package:nfcmrt/src/presentation/screens/balance/widget/card_back.dart';
 export 'package:nfcmrt/src/presentation/screens/balance/widget/card_front.dart';
 export 'package:nfcmrt/src/core/constants/asset_paths.dart';
 export 'package:nfcmrt/src/presentation/common/widgets/asset_image_view.dart';
+export 'package:nfcmrt/src/data/repositories/card_information_repositories_impl.dart';
+export 'package:nfcmrt/src/data/repositories/fare_calculation_repositories_impl.dart';

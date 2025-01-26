@@ -95,21 +95,17 @@ class FareCalculationImpl extends FareCalculation {
         "15-16": 20,
       };
 
-      // Add symmetrical keys (e.g., "1-0" for "0-1")
       fareMatrix.addAll({
         for (var entry in fareMatrix.entries)
           if (!fareMatrix.containsKey("${entry.key.split('-')[1]}-${entry.key.split('-')[0]}"))
             "${entry.key.split('-')[1]}-${entry.key.split('-')[0]}": entry.value
       });
 
-      // Return stations and fareMatrix as part of the response
       return {
         'stations': stations,
         'fareMatrix': fareMatrix,
       };
     } catch (e) {
-      // Improved error handling with better messages and stopping the NFC session safely
-      print('Error during data retrieval: $e');
       await NfcManager.instance.stopSession();
       throw Exception('Data fetch failed: ${e.toString()}');
     }

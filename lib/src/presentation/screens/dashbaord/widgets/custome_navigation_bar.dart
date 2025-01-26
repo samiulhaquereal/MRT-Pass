@@ -9,7 +9,7 @@ class CustomNavigationBar extends StatelessWidget {
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (context, state) {
         if (state is! DashboardLoaded) {
-          return SizedBox.shrink(); // Show nothing while the state is not loaded
+          return SizedBox.shrink();
         }
 
         return Stack(
@@ -28,8 +28,8 @@ class CustomNavigationBar extends StatelessWidget {
                   child: BottomNavigationBar(
                     backgroundColor: Colors.transparent,
                     elevation: 0,
-                    selectedItemColor: Color(0xFF0F5D20), // Replace with your AppColors.primaryColor
-                    unselectedItemColor: Colors.grey, // Replace with custom color logic
+                    selectedItemColor: Color(0xFF0F5D20),
+                    unselectedItemColor: Colors.grey,
                     currentIndex: state.currentIndex,
                     onTap: (index) {
                       context.read<DashboardBloc>().add(DashboardNavigationItemSelected(index));
@@ -54,7 +54,7 @@ class CustomNavigationBar extends StatelessWidget {
               child: Container(
                 width: MediaQuery.of(context).size.width / 2,
                 height: 3.h,
-                color: Color(0xFF0F5D20), // Replace with your AppColors.primaryColor
+                color: Color(0xFF0F5D20),
               ),
             ),
           ],

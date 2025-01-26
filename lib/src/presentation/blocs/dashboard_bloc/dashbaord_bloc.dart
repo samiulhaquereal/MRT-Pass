@@ -18,7 +18,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   void _onNavigationItemSelected(
       DashboardNavigationItemSelected event, Emitter<DashboardState> emit) {
-    // Update the current navigation index
     emit(DashboardLoaded(currentIndex: event.index));
   }
 }

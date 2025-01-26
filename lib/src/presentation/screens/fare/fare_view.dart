@@ -51,8 +51,8 @@ class FareScreen extends StatelessWidget {
                     onChanged: (StationEntities? newTo) {
                       if (newTo != null) {
                         context.read<FareBloc>().add(StationSelectionChanged(
-                          selectedFrom: state.selectedFrom,  // Keep the 'From' station intact
-                          selectedTo: newTo,  // Change the 'To' station
+                          selectedFrom: state.selectedFrom,
+                          selectedTo: newTo,
                         ));
                       }
                     },
@@ -83,8 +83,8 @@ class FareScreen extends StatelessWidget {
                     onChanged: (StationEntities? newFrom) {
                       if (newFrom != null) {
                         context.read<FareBloc>().add(StationSelectionChanged(
-                          selectedFrom: newFrom,  // Change the 'From' station
-                          selectedTo: state.selectedTo,  // Keep the 'To' station intact
+                          selectedFrom: newFrom,
+                          selectedTo: state.selectedTo,
                         ));
                       }
                     },

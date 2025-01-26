@@ -14,7 +14,7 @@ class FareInformation implements UseCase<Map<String, dynamic>, NoParams> {
             (failure) => Left(failure),
             (success) {
           if (success.containsKey('stations') && success['stations'] is List<dynamic>) {
-            return Right(success); // Return both stations and fareMatrix
+            return Right(success);
           } else {
             return const Left(UnknownError('Invalid or missing station data'));
           }

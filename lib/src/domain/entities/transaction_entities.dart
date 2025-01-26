@@ -21,7 +21,6 @@ class TransactionEntity {
     required this.trailing,
   });
 
-  /// Factory constructor to create TransactionEntity from a Transaction object
   factory TransactionEntity.fromTransaction(Transaction transaction, String cardId) {
     return TransactionEntity(
       cardId: cardId,

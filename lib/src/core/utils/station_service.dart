@@ -23,12 +23,10 @@ class StationService {
   }
 
   static String translate(String stationName) {
-    // Here you can add the logic for translation, for example:
     switch (stationName) {
       case "Motijheel": return "Motijheel (Localized)";
       case "Bangladesh Secretariat": return "Bangladesh Secretariat (Localized)";
       case "Dhaka University": return "Dhaka University (Localized)";
-    // Add other stations...
       default: return stationName;
     }
   }

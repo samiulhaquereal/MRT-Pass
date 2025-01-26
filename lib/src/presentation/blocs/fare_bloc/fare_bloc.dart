@@ -29,9 +29,8 @@ class FareBloc extends Bloc<FareEvent, FareState> {
           selectedFrom: stations.first,
           selectedTo: stations[1],
           fare: 0,
-          fareMatrix: fareMatrix, // Pass the fareMatrix to the state
+          fareMatrix: fareMatrix,
         ));
-        log("Initial State: From ${stations.first.name}, To ${stations[1].name}");
       },
     );
   }

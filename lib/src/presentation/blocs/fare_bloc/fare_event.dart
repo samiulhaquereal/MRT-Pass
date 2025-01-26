@@ -7,10 +7,8 @@ abstract class FareEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-/// Event triggered when the fare page is loaded
 class FarePageLoaded extends FareEvent {}
 
-/// Event triggered when the user selects different stations
 class StationSelectionChanged extends FareEvent {
   final StationEntities? selectedFrom;
   final StationEntities? selectedTo;

@@ -41,7 +41,6 @@ class TransactionParser {
     return transactions;
   }
 
-  // Parse each transaction block
   static Transaction parseTransactionBlock(Uint8List block) {
     if (block.length != 16) {
       throw ArgumentError('Invalid block size');
@@ -66,8 +65,8 @@ class TransactionParser {
 
     String fromStation = StationService.getStationName(fromStationCode);
     String toStation = StationService.getStationName(toStationCode);
-    final fromStationName = StationService.translate(fromStation);  // This should be retrieved from a station list
-    final toStationName = StationService.translate(toStation);  // This should be retrieved from a station list
+    final fromStationName = StationService.translate(fromStation);
+    final toStationName = StationService.translate(toStation);
     return Transaction(
       fixedHeader: fixedHeaderStr,
       dateTime: dateTime,

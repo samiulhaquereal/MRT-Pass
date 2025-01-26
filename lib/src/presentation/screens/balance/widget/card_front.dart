@@ -82,7 +82,7 @@ class CreditCardFont extends StatelessWidget {
             right: 20.w,
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF8CA6DB), // Set your custom background color here
+                  backgroundColor: Color(0xFF8CA6DB),
                 ),
                 onPressed: onPressed,
                 child: Text('Rescan',style: TextStyle(fontSize: 10.sp,color: Colors.white))

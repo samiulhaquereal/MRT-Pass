@@ -7,13 +7,10 @@ abstract class FareState extends Equatable {
   List<Object?> get props => [];
 }
 
-/// Initial state when the fare page is uninitialized
 class FareInitial extends FareState {}
 
-/// State when fare data is being loaded
 class FareLoading extends FareState {}
 
-/// State when fare data is successfully loaded
 class FareLoaded extends FareState {
   final List<StationEntities> stations;
   final StationEntities selectedFrom;
@@ -31,7 +28,6 @@ class FareLoaded extends FareState {
     this.discountedFare,
   });
 
-  // A copyWith method to update specific fields without overwriting the entire state
   FareLoaded copyWith({
     List<StationEntities>? stations,
     StationEntities? selectedFrom,
@@ -54,8 +50,6 @@ class FareLoaded extends FareState {
   List<Object?> get props => [stations,selectedFrom,selectedTo,fare,fareMatrix,discountedFare];
 }
 
-
-/// State when an error occurs on the fare page
 class FarePageError extends FareState {
   final String message;
 

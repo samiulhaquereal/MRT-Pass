@@ -1,10 +1,8 @@
 import 'dart:typed_data';
 
-// ByteParser equivalent in Dart
 class ByteParser {
   static String toHexString(Uint8List bytes) {
     return bytes.map((byte) {
-      // Format byte to hex
       return byte.toRadixString(16).padLeft(2, '0').toUpperCase();
     }).join(' ');
   }
