@@ -129,7 +129,7 @@ class FareScreen extends StatelessWidget {
                         ),
                         Gap(10.h),
                         Text(
-                          '৳ ${state.fare}',
+                          '৳ ${state.discountedFare ?? 0}',
                           style: TextStyle(
                             fontSize: 32.sp,
                             fontWeight: FontWeight.bold,
@@ -148,7 +148,7 @@ class FareScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              'Discount ৳ ${state.discountedFare ?? 0}',
+                              'Discount ৳ ${((state.fare) - (state.discountedFare ?? 0)).toString()}',
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 color: Colors.green,
@@ -158,7 +158,7 @@ class FareScreen extends StatelessWidget {
                         ),
                         Gap(10.h),
                         Text(
-                          'Your balance (৳ ${state.fare}) is sufficient.',
+                          'Your balance (৳) is sufficient.',
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: Colors.green,

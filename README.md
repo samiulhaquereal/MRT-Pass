@@ -1,16 +1,12 @@
-# nfcmrt
+MRTPass is a Flutter-based application designed to enhance your MRT card experience. With MRTPass, you can:
 
-A new Flutter project.
+1. Quickly Check Your MRT Card Balance: Scan your MRT card to instantly view your current balance and recent transactions.
+2. Fare Calculation Made Easy: Calculate fares between stations and determine how many round trips your current balance can cover.
 
-## Getting Started
+The application is built with BLoC (Business Logic Component) for state management, adhering to SOLID principles to ensure clean and scalable architecture.
 
-This project is a starting point for a Flutter application.
+This project draws inspiration from MRT Buddy, an innovative app by Ani Adhikary and his team, originally developed using Kotlin Multiplatform (KMP). I reimagined the concept with Flutter, bringing the functionality to a broader audience with cross-platform support.
 
-A few resources to get you started if this is your first Flutter project:
+Check out MRTPass on GitHub: https://lnkd.in/gggYsdau
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Learn more about MRT Buddy here: https://mrtbuddy.com

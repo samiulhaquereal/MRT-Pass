@@ -8,6 +8,7 @@ class FareBloc extends Bloc<FareEvent, FareState> {
   }
 
   final FareInformation fareInformation;
+  int discountedFare = 0 ;
 
   void _onPageInit(FarePageLoaded event, Emitter<FareState> emit) async {
     emit(FareLoading());
@@ -48,7 +49,7 @@ class FareBloc extends Bloc<FareEvent, FareState> {
         currentState.fareMatrix,
       );
 
-      final discountedFare = (fare * 0.9).toInt();
+      discountedFare = (fare * 0.9).toInt();
 
       emit(currentState.copyWith(
         selectedFrom: newSelectedFrom,
